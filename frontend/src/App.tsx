@@ -123,9 +123,20 @@ export default App */
 
 function App() {
   return (
-    <div>
-      <h1>Startup Navigator</h1>
-      <p>Project Setup Successful 🚀</p>
+    <div className="min-h-screen bg-slate-100 flex items-center justify-center">
+
+      <div className="bg-white p-10 rounded-xl shadow-lg">
+
+        <h1 className="text-5xl font-bold text-blue-700">
+          Startup Navigator
+        </h1>
+
+        <p className="mt-4 text-gray-600">
+          Project Setup Successful 🚀
+        </p>
+
+      </div>
+
     </div>
   );
 }

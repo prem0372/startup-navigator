@@ -1,19 +1,63 @@
-function Navbar() {
-  return (
-    <nav className="bg-blue-600 text-white p-4">
-      <div className="max-w-7xl mx-auto flex justify-between">
-        <h1 className="text-xl font-bold">Startup Navigator</h1>
+import { NavLink } from "react-router-dom";
+import { Menu } from "lucide-react";
 
-        <div className="space-x-6">
-          <span>Home</span>
-          <span>Explore</span>
-          <span>AI Search</span>
-          <span>Resources</span>
-          <span>About</span>
-          <span>Contact</span>
+function Navbar() {
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Explore", path: "/explore" },
+    { name: "AI Search", path: "/ai-search" },
+    { name: "Resources", path: "/resources" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
+
+  return (
+    <header className="sticky top-0 z-50 bg-white shadow">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <NavLink
+          to="/"
+          className="text-2xl font-bold text-blue-600"
+        >
+          🚀 Startup Navigator
+        </NavLink>
+
+        <nav className="hidden gap-6 md:flex">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                isActive
+                  ? "font-semibold text-blue-600"
+                  : "text-gray-600 hover:text-blue-600"
+              }
+            >
+              {item.name}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="hidden gap-3 md:flex">
+          <NavLink
+            to="/login"
+            className="rounded-lg border px-4 py-2"
+          >
+            Login
+          </NavLink>
+
+          <NavLink
+            to="/register"
+            className="rounded-lg bg-blue-600 px-4 py-2 text-white"
+          >
+            Register
+          </NavLink>
         </div>
+
+        <button className="md:hidden">
+          <Menu />
+        </button>
       </div>
-    </nav>
+    </header>
   );
 }
 

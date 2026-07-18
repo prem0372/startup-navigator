@@ -1,22 +1,63 @@
+import { ArrowRight } from "lucide-react";
 import SearchBar from "./SearchBar";
 
 function Hero() {
   return (
-    <section className="bg-slate-50">
-      <div className="mx-auto max-w-7xl px-6 py-20 text-center">
+    <section className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white">
+      <div className="mx-auto max-w-7xl px-6 py-24">
 
-        <h1 className="text-5xl font-extrabold text-slate-900 leading-tight">
-          Launch & Grow Your Startup
-        </h1>
+        <div className="max-w-4xl">
 
-        <p className="mx-auto mt-6 max-w-3xl text-lg text-slate-600">
-          Startup Navigator helps entrepreneurs learn Company Registration,
-          Funding, Legal Compliance, Hiring, Branding, Marketing,
-          Taxation, AI Tools and Business Growth.
-        </p>
+          <p className="mb-4 rounded-full bg-white/20 px-4 py-2 inline-block">
+            🚀 AI Powered Startup Platform
+          </p>
 
-        <div className="mt-10">
-          <SearchBar />
+          <h1 className="text-6xl font-extrabold leading-tight">
+            Launch.
+            <br />
+            Build.
+            <br />
+            Scale Your Startup.
+          </h1>
+
+          <p className="mt-8 text-xl text-blue-100">
+            Learn everything from Company Registration,
+            Legal Compliance, Funding,
+            Marketing, Branding,
+            Taxation and AI Tools.
+          </p>
+
+          <div className="mt-10">
+            <SearchBar />
+          </div>
+
+          <div className="mt-12 flex flex-wrap gap-3">
+
+            {[
+              "Company Registration",
+              "Funding",
+              "GST",
+              "Marketing",
+              "AI",
+            ].map((item) => (
+              <span
+                key={item}
+                className="rounded-full bg-white/20 px-4 py-2"
+              >
+                {item}
+              </span>
+            ))}
+
+          </div>
+
+          <button className="mt-12 flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-blue-700">
+
+            Explore Startup Guides
+
+            <ArrowRight size={20} />
+
+          </button>
+
         </div>
 
       </div>

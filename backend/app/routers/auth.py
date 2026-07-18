@@ -8,6 +8,11 @@ from app.schemas.user import UserCreate
 from app.schemas.user import UserResponse
 from app.services.auth_service import create_user
 
+from app.schemas.auth import LoginRequest
+from app.schemas.auth import TokenResponse
+from app.services.auth_service import authenticate_user
+from app.core.security import create_access_token
+
 router = APIRouter(
     prefix="/auth",
     tags=["Authentication"],
@@ -35,3 +40,36 @@ def register(
         )
 
     return new_user
+
+@router.post(
+    "/login",
+    response_model=TokenResponse,
+)
+def login(
+    request: LoginRequest,
+    db: Session = Depends(get_db),
+):
+
+    user = authenticate_user(
+        db=db,
+        email=request.email,
+        password=request.password,
+    )
+
+    if user is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid email or password",
+        )
+
+    token = create_access_token(
+        {
+            "sub": user.email,
+            "role": user.role,
+        }
+    )
+
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+    }

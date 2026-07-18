@@ -6,11 +6,14 @@ from app.db.database import engine
 
 # Import all models here
 from app.models.user import User
+from app.routers.auth import router as auth_router
 
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
 )
+
+app.include_router(auth_router)
 
 
 @app.on_event("startup")

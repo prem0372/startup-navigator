@@ -13,6 +13,7 @@ from app.routers.topics import router as topic_router
 
 from app.models.resource import Resource
 from app.routers.resources import router as resource_router
+from app.routers.ai import router as ai_router
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -22,7 +23,7 @@ app = FastAPI(
 app.include_router(auth_router)
 app.include_router(topic_router)
 app.include_router(resource_router)
-
+app.include_router(ai_router)
 
 @app.on_event("startup")
 def startup():

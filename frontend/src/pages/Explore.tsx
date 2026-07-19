@@ -1,58 +1,60 @@
-function Explore() {
+import { useEffect, useState } from "react";
+import { getTopics } from "../api/topicService";
+
+type Topic = {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  difficulty: string;
+};
+
+export default function Explore() {
+  const [topics, setTopics] = useState<Topic[]>([]);
+
+  useEffect(() => {
+    loadTopics();
+  }, []);
+
+  const loadTopics = async () => {
+    try {
+      const data = await getTopics();
+      setTopics(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <main className="mx-auto max-w-7xl px-6 py-16">
+    <div className="max-w-6xl mx-auto py-10 px-6">
+      <h1 className="text-3xl font-bold mb-6">
+        Explore Topics
+      </h1>
 
-      <div className="mb-10">
-
-        <h1 className="text-5xl font-bold">
-          Explore Startup Topics
-        </h1>
-
-        <p className="mt-4 text-gray-600">
-          Browse startup guides and business resources.
-        </p>
-
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-
-        {[
-          "Company Registration",
-          "Funding",
-          "Legal Compliance",
-          "Hiring",
-          "Marketing",
-          "Branding",
-          "Taxation",
-          "AI Tools",
-          "Business Growth",
-        ].map((topic) => (
-
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {topics.map((topic) => (
           <div
-            key={topic}
-            className="rounded-xl border bg-white p-6 shadow transition hover:shadow-lg"
+            key={topic.id}
+            className="border rounded-xl p-5 shadow"
           >
-
-            <h2 className="text-2xl font-semibold">
-              {topic}
+            <h2 className="text-xl font-semibold">
+              {topic.title}
             </h2>
 
-            <p className="mt-3 text-gray-600">
-              Learn everything about {topic.toLowerCase()}.
+            <p className="text-sm text-gray-500 mt-1">
+              {topic.category}
             </p>
 
-            <button className="mt-6 rounded-lg bg-blue-600 px-5 py-2 text-white">
-              View Details
-            </button>
+            <p className="mt-3">
+              {topic.description}
+            </p>
 
+            <span className="inline-block mt-4 bg-blue-100 text-blue-700 px-3 py-1 rounded">
+              {topic.difficulty}
+            </span>
           </div>
-
         ))}
-
       </div>
-
-    </main>
+    </div>
   );
 }
-
-export default Explore;

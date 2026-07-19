@@ -5,6 +5,7 @@ from sqlalchemy import String
 from sqlalchemy import Text
 
 from app.db.database import Base
+from sqlalchemy.orm import relationship
 
 
 class Topic(Base):
@@ -39,4 +40,10 @@ class Topic(Base):
     is_featured = Column(
         Boolean,
         default=False,
+    )
+
+    resources = relationship(
+    "Resource",
+    back_populates="topic",
+    cascade="all, delete",
     )

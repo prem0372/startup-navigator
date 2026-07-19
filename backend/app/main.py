@@ -8,12 +8,16 @@ from app.db.database import engine
 from app.models.user import User
 from app.routers.auth import router as auth_router
 
+from app.models.topics import Topic
+from app.routers.topics import router as topic_router
+
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
 )
 
 app.include_router(auth_router)
+app.include_router(topic_router)
 
 
 @app.on_event("startup")

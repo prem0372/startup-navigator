@@ -1,17 +1,28 @@
 import { useEffect, useState } from "react";
 import { getDashboardStats } from "../api/dashboardService";
+import { getHistory } from "../api/historyService";
 
 function Dashboard() {
   const [stats, setStats] = useState<any>(null);
+  const [history, setHistory] = useState<any[]>([]);
 
   useEffect(() => {
-    async function loadStats() {
-      const data = await getDashboardStats();
-      console.log("Dashboard Response :", data);
-      setStats(data);
-    }
-    loadStats();
-  }, []);
+
+  async function loadDashboard() {
+
+    const statsData = await getDashboardStats();
+
+    setStats(statsData);
+
+    const historyData = await getHistory();
+
+    setHistory(historyData);
+
+  }
+
+  loadDashboard();
+
+}, []);
   return (
     <main className="mx-auto max-w-7xl px-6 py-16">
 
@@ -55,15 +66,21 @@ function Dashboard() {
 
         <ul className="space-y-4 text-gray-600">
 
-          <li>✔ Asked about Company Registration</li>
+  {
 
-          <li>✔ Viewed Funding Guide</li>
+    history.map((item) => (
 
-          <li>✔ Downloaded Startup Checklist</li>
+      <li key={item.id}>
 
-          <li>✔ Asked AI about GST</li>
+        ✔ {item.prompt}
 
-        </ul>
+      </li>
+
+    ))
+
+  }
+
+</ul>
 
       </div>
 

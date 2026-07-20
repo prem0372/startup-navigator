@@ -14,12 +14,15 @@ from app.routers.topics import router as topic_router
 from app.models.resource import Resource
 from app.routers.resources import router as resource_router
 from app.routers.ai import router as ai_router
+from app.models.history import History
+from app.routers.history import router as history_router
 
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
 )
 
+app.include_router(history_router)
 app.include_router(auth_router)
 app.include_router(topic_router)
 app.include_router(resource_router)

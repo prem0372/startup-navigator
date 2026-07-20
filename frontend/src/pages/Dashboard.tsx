@@ -1,4 +1,17 @@
+import { useEffect, useState } from "react";
+import { getDashboardStats } from "../api/dashboardService";
+
 function Dashboard() {
+  const [stats, setStats] = useState<any>(null);
+
+  useEffect(() => {
+    async function loadStats() {
+      const data = await getDashboardStats();
+      console.log("Dashboard Response :", data);
+      setStats(data);
+    }
+    loadStats();
+  }, []);
   return (
     <main className="mx-auto max-w-7xl px-6 py-16">
 
@@ -7,29 +20,29 @@ function Dashboard() {
       </h1>
 
       <p className="mt-4 text-gray-600">
-        Welcome back!
+        Welcome back, {stats?.user} 👋
       </p>
 
       <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 
         <div className="rounded-xl border p-6 shadow">
           <h2 className="text-lg font-semibold">Searches</h2>
-          <p className="mt-4 text-4xl font-bold text-blue-600">25</p>
+          <p className="mt-4 text-4xl font-bold text-blue-600">{stats?.history}</p>
         </div>
 
         <div className="rounded-xl border p-6 shadow">
           <h2 className="text-lg font-semibold">Bookmarks</h2>
-          <p className="mt-4 text-4xl font-bold text-green-600">12</p>
+          <p className="mt-4 text-4xl font-bold text-green-600">0</p>
         </div>
 
         <div className="rounded-xl border p-6 shadow">
           <h2 className="text-lg font-semibold">Resources</h2>
-          <p className="mt-4 text-4xl font-bold text-orange-500">18</p>
+          <p className="mt-4 text-4xl font-bold text-orange-500">{stats?.resources}</p>
         </div>
 
         <div className="rounded-xl border p-6 shadow">
           <h2 className="text-lg font-semibold">AI Chats</h2>
-          <p className="mt-4 text-4xl font-bold text-purple-600">40</p>
+          <p className="mt-4 text-4xl font-bold text-purple-600">{stats?.topics}</p>
         </div>
 
       </div>

@@ -37,4 +37,5 @@ def dashboard_stats(
         "resources": resources,
         "history": history,
         "user": current_user.name,
+        "bookmarks": 0
     }

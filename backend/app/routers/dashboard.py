@@ -9,6 +9,7 @@ from app.models.history import History
 
 from app.core.security import get_current_user
 from app.models.user import User
+from app.models.bookmark import Bookmark
 
 router = APIRouter(
     prefix="/dashboard",
@@ -31,11 +32,17 @@ def dashboard_stats(
         .filter(History.user_id == current_user.id)
         .count()
     )
-
+    bookmarks = (
+        db.query(Bookmark)
+        .filter(
+            Bookmark.user_id == current_user.id
+        )
+        .count()
+    )
     return {
         "topics": topics,
         "resources": resources,
         "history": history,
         "user": current_user.name,
-        "bookmarks": 0
+        "bookmarks": bookmarks
     }

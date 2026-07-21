@@ -80,7 +80,7 @@ function Bookmarks() {
 
                   <h2 className="text-xl font-semibold">
 
-                    Topic ID : {bookmark.topic_id}
+                    Topic : {bookmark.topic.title}
 
                   </h2>
 

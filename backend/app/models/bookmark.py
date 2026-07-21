@@ -1,6 +1,7 @@
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 
 from app.db.database import Base
 
@@ -23,4 +24,8 @@ class Bookmark(Base):
     topic_id = Column(
         Integer,
         ForeignKey("topics.id"),
+    )
+
+    topic = relationship(
+        "Topic"
     )

@@ -55,7 +55,7 @@ function Dashboard() {
 
         <div className="rounded-xl border p-6 shadow">
           <h2 className="text-lg font-semibold">Bookmarks</h2>
-          <p className="mt-4 text-4xl font-bold text-green-600">0</p>
+          <p className="mt-4 text-4xl font-bold text-green-600">{stats?.bookmarks}</p>
         </div>
 
         <div className="rounded-xl border p-6 shadow">

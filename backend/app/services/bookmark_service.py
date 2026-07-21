@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.models.bookmark import Bookmark
-
+from sqlalchemy.orm import joinedload
 
 def create_bookmark(
     db: Session,
@@ -28,7 +28,12 @@ def get_bookmarks(
 
     return (
         db.query(Bookmark)
-        .filter(Bookmark.user_id == user_id)
+        .options(
+            joinedload(Bookmark.topic)
+        )
+        .filter(
+            Bookmark.user_id == user_id
+        )
         .all()
     )
 

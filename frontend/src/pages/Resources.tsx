@@ -1,70 +1,36 @@
 import { useEffect, useState } from "react";
-
 import { getResources } from "../api/resourceService";
+
+type Resource = {
+  id: number;
+  title: string;
+  url: string;
+  resource_type: string;
+};
 
 function Resources() {
 
-  const [resources, setResources] = useState<any[]>([]);
-
-  const [loading, setLoading] = useState(true);
-
-  const [error, setError] = useState("");
+  const [resources, setResources] = useState<Resource[]>([]);
 
   useEffect(() => {
-
-    async function loadResources() {
-
-      try {
-
-        const data = await getResources();
-
-        console.log("Resources:", data);
-
-        setResources(data);
-
-      } catch (err) {
-
-        console.error(err);
-
-        setError("Failed to load resources");
-
-      } finally {
-
-        setLoading(false);
-
-      }
-
-    }
 
     loadResources();
 
   }, []);
 
-  if (loading) {
+  async function loadResources() {
 
-    return (
+    try {
 
-      <h2 className="text-center text-2xl mt-20">
+      const data = await getResources();
 
-        Loading Resources...
+      setResources(data);
 
-      </h2>
+    } catch (error) {
 
-    );
+      console.log(error);
 
-  }
-
-  if (error) {
-
-    return (
-
-      <h2 className="text-center text-red-600 mt-20">
-
-        {error}
-
-      </h2>
-
-    );
+    }
 
   }
 
@@ -93,9 +59,9 @@ function Resources() {
 
             </h2>
 
-            <p className="mt-3 text-gray-600">
+            <p className="mt-3 text-gray-500">
 
-              Type : {resource.resource_type}
+              {resource.resource_type}
 
             </p>
 
@@ -107,13 +73,11 @@ function Resources() {
 
               rel="noreferrer"
 
+              className="mt-5 inline-block rounded bg-blue-600 px-4 py-2 text-white"
+
             >
 
-              <button className="mt-5 rounded bg-blue-600 px-4 py-2 text-white">
-
-                Open Resource
-
-              </button>
+              Open Resource
 
             </a>
 

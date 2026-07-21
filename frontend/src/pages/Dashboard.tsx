@@ -6,17 +6,29 @@ function Dashboard() {
   const [stats, setStats] = useState<any>(null);
   const [history, setHistory] = useState<any[]>([]);
 
-  useEffect(() => {
+ useEffect(() => {
 
   async function loadDashboard() {
 
-    const statsData = await getDashboardStats();
+    try {
 
-    setStats(statsData);
+      const statsData = await getDashboardStats();
 
-    const historyData = await getHistory();
+      console.log("Dashboard Stats:", statsData);
 
-    setHistory(historyData);
+      setStats(statsData);
+
+      const historyData = await getHistory();
+
+      console.log("History:", historyData);
+
+      setHistory(historyData);
+
+    } catch (error) {
+
+      console.error("Dashboard Error:", error);
+
+    }
 
   }
 

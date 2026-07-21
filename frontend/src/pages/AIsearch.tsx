@@ -62,49 +62,30 @@ function AISearch() {
 
     <main className="mx-auto max-w-5xl px-6 py-20">
 
-      <h1 className="text-5xl font-bold">
-
-        AI Startup Assistant
-
+      <h1 className="text-5xl font-bold text-center">
+        🚀 AI Startup Assistant
       </h1>
+
+    <p className="mt-4 text-center text-gray-600">
+      Ask anything about startups, funding, legal, marketing, GST, or business ideas.
+    </p>
 
       <div className="mt-10">
 
         <textarea
-
-          rows={6}
-
-          placeholder="Ask anything about startups..."
-
+          rows={7}
+          placeholder="Example: How do I register a startup in India?"
           value={prompt}
-
           onChange={(e) => setPrompt(e.target.value)}
-
-          className="w-full rounded-lg border p-5"
-
+          className="mt-8 w-full rounded-xl border border-gray-300 p-5 shadow-sm focus:border-blue-500 focus:outline-none"
         />
-
         <button
-
           onClick={handleAskAI}
-
           disabled={loading}
-
-          className="mt-5 rounded-lg bg-blue-600 px-6 py-3 text-white"
-
-        >
-
-          {
-
-            loading
-
-              ? "Thinking..."
-
-              : "Ask AI"
-
-          }
-
-        </button>
+          className="mt-5 rounded-xl bg-blue-600 px-8 py-3 font-semibold text-white hover:bg-blue-700 disabled:bg-gray-400"
+      >
+        {loading ? "Thinking..." : "Ask AI"}
+      </button>
 
       </div>
 
@@ -122,27 +103,21 @@ function AISearch() {
 
       }
 
-      <div className="mt-10 rounded-xl border p-6">
+      <div className="mt-10 rounded-2xl border bg-white p-8 shadow">
 
-        <h2 className="text-xl font-semibold">
+  <h2 className="text-2xl font-bold text-blue-700">
+    AI Response
+  </h2>
 
-          AI Response
+  <div className="mt-6 whitespace-pre-wrap leading-8 text-gray-700">
 
-        </h2>
+    {answer
+      ? answer
+      : "Your AI generated answer will appear here."}
 
-        <p className="mt-4 whitespace-pre-line text-gray-700">
+  </div>
 
-          {
-
-            answer ||
-
-            "Your AI generated answer will appear here."
-
-          }
-
-        </p>
-
-      </div>
+</div>
 
     </main>
 

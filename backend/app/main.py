@@ -18,6 +18,7 @@ from app.models.history import History
 from app.routers.history import router as history_router
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.dashboard import router as dashboard_router
+from app.routers.bookmark import router as bookmark_router
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -40,6 +41,7 @@ app.include_router(topic_router)
 app.include_router(resource_router)
 app.include_router(ai_router)
 app.include_router(dashboard_router)
+app.include_router(bookmark_router)
 
 @app.on_event("startup")
 def startup():

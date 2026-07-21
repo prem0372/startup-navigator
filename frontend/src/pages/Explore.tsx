@@ -11,7 +11,7 @@ type Topic = {
 
 export default function Explore() {
   const [topics, setTopics] = useState<Topic[]>([]);
-
+  const [search, setSearch] = useState("");
   useEffect(() => {
     loadTopics();
   }, []);
@@ -24,15 +24,26 @@ export default function Explore() {
       console.log(error);
     }
   };
+  const filteredTopics = topics.filter((topic) =>
+  topic.title
+    .toLowerCase()
+    .includes(search.toLowerCase())
+);
 
   return (
     <div className="max-w-6xl mx-auto py-10 px-6">
       <h1 className="text-3xl font-bold mb-6">
-        Explore Topics
+        <input
+          type="text"
+          placeholder="Search topics..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full border rounded-lg p-3 mb-8"
+        />
       </h1>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {topics.map((topic) => (
+        {filteredTopics.map((topic) => (
           <div
             key={topic.id}
             className="border rounded-xl p-5 shadow"

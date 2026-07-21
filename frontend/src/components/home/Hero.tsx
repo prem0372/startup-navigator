@@ -1,7 +1,11 @@
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
 function Hero() {
+
+  const navigate = useNavigate();
+
   return (
     <section className="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 text-white">
       <div className="mx-auto max-w-7xl px-6 py-24">
@@ -50,12 +54,12 @@ function Hero() {
 
           </div>
 
-          <button className="mt-12 flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-blue-700">
-
+          <button
+            onClick={() => navigate("/explore")}
+            className="mt-12 flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-semibold text-blue-700"
+          >
             Explore Startup Guides
-
             <ArrowRight size={20} />
-
           </button>
 
         </div>

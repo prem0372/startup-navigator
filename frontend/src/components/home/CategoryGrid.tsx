@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Building2,
   Landmark,
@@ -46,7 +47,10 @@ const categories = [
   },
 ];
 
-function CategoryGrid() {
+function CategoryGrid() 
+{
+  const navigate = useNavigate();
+
   return (
     <section className="py-24">
 
@@ -71,8 +75,15 @@ function CategoryGrid() {
             const Icon = item.icon;
 
             return (
-              <Card key={item.title}>
-
+              <Card
+                key={item.title}
+                onClick={() =>
+                  navigate(
+                    `/explore?search=${encodeURIComponent(item.title)}`
+          )
+  }
+  className="cursor-pointer hover:shadow-xl transition"
+>
                 <Icon
                   className="mb-5 text-blue-600"
                   size={36}

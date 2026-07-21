@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../ui/Button";
 
-function CTASection() {
+function CTASection() 
+{
+  const navigate = useNavigate();
+
   return (
     <section className="bg-blue-700 py-24 text-white">
 
@@ -17,7 +21,7 @@ function CTASection() {
 
         <div className="mt-10">
 
-          <Button>
+          <Button onClick={() => navigate("/explore")}>
             Start Exploring
           </Button>
 

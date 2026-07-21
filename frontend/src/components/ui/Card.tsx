@@ -1,10 +1,19 @@
 type CardProps = {
   children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
 };
 
-function Card({ children }: CardProps) {
+function Card({
+  children,
+  className = "",
+  onClick,
+}: CardProps) {
   return (
-    <div className="rounded-xl border bg-white p-6 shadow-md">
+    <div
+      onClick={onClick}
+      className={`rounded-xl border bg-white p-6 shadow-md ${className}`}
+    >
       {children}
     </div>
   );

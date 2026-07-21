@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   Bot,
   BookOpen,
@@ -13,28 +14,35 @@ const features = [
     description:
       "Ask startup related questions in natural language and get instant AI-powered answers.",
     icon: Bot,
+    path: "/ai-search",
   },
   {
     title: "Startup Knowledge Base",
     description:
       "Access curated articles, guides, checklists and startup resources from one place.",
     icon: BookOpen,
+    path: "/resources",
   },
   {
     title: "Business Growth",
     description:
       "Learn marketing, branding, hiring and scaling strategies for your startup.",
     icon: TrendingUp,
+    path: "/explore",
   },
   {
     title: "Legal & Compliance",
     description:
       "Understand company registration, GST, taxation and legal compliance.",
     icon: ShieldCheck,
+    path: "/explore",
   },
 ];
 
-function FeatureSection() {
+function FeatureSection() 
+{
+  const navigate = useNavigate();
+
   return (
     <section className="bg-slate-50 py-24">
       <div className="mx-auto max-w-7xl px-6">
@@ -54,7 +62,11 @@ function FeatureSection() {
             const Icon = feature.icon;
 
             return (
-              <Card key={feature.title}>
+              <Card
+                key={feature.title}
+                onClick={() => navigate(feature.path)}
+                className="cursor-pointer hover:shadow-xl hover:scale-105 transition duration-300"
+          >
 
                 <Icon
                   className="mb-5 text-blue-600"

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getTopics } from "../api/topicService";
+import { addBookmark } from "../api/bookmarkService";
 
 type Topic = {
   id: number;
@@ -16,15 +17,40 @@ export default function Explore() {
     loadTopics();
   }, []);
 
-  const loadTopics = async () => {
-    try {
-      const data = await getTopics();
-      setTopics(data);
-    } catch (error) {
-      console.log(error);
+const loadTopics = async () => {
+  try {
+    const data = await getTopics();
+    setTopics(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+async function handleBookmark(topicId: number) {
+
+  try {
+
+    await addBookmark(topicId);
+
+    alert("Bookmark Added Successfully ✅");
+
+  } catch (error: any) {
+
+    if (error.response) {
+
+      alert(error.response.data.detail);
+
+    } else {
+
+      alert("Server Error");
+
     }
-  };
-  const filteredTopics = topics.filter((topic) =>
+
+  }
+
+}
+
+const filteredTopics = topics.filter((topic) =>
   topic.title
     .toLowerCase()
     .includes(search.toLowerCase())
@@ -63,6 +89,12 @@ export default function Explore() {
             <span className="inline-block mt-4 bg-blue-100 text-blue-700 px-3 py-1 rounded">
               {topic.difficulty}
             </span>
+            <button
+              onClick={() => handleBookmark(topic.id)}
+              className="mt-5 w-full rounded-lg bg-blue-600 py-2 text-white"
+          >
+            Bookmark
+        </button>
           </div>
         ))}
       </div>

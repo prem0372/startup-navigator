@@ -29,8 +29,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://startup-navigator.vercel.app",
-        "https://startup-navigator-5gne.onrender.com"
+        #"https://startup-navigator.vercel.app",
+        #"https://startup-navigator-5gne.onrender.com"
     ],
     allow_credentials=False,
     allow_methods=["*"],

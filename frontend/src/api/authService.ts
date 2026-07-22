@@ -31,3 +31,21 @@ export async function getCurrentUser() {
   return response.data;
 
 }
+export async function registerUser(
+  name: string,
+  email: string,
+  password: string
+) {
+
+  const response = await api.post(
+    "/auth/register",
+    {
+      name,
+      email,
+      password,
+    }
+  );
+
+  return response.data;
+
+}

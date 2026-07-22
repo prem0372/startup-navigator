@@ -26,3 +26,47 @@ def create_topic(
 def get_topics(db: Session):
 
     return db.query(Topic).all()
+def update_topic(
+    db: Session,
+    topic_id: int,
+    topic: TopicCreate,
+):
+
+    db_topic = (
+        db.query(Topic)
+        .filter(Topic.id == topic_id)
+        .first()
+    )
+
+    if db_topic is None:
+        return None
+
+    db_topic.title = topic.title
+    db_topic.category = topic.category
+    db_topic.description = topic.description
+    db_topic.difficulty = topic.difficulty
+
+    db.commit()
+    db.refresh(db_topic)
+
+    return db_topic
+
+
+def delete_topic(
+    db: Session,
+    topic_id: int,
+):
+
+    db_topic = (
+        db.query(Topic)
+        .filter(Topic.id == topic_id)
+        .first()
+    )
+
+    if db_topic is None:
+        return False
+
+    db.delete(db_topic)
+    db.commit()
+
+    return True

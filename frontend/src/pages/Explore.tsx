@@ -1,4 +1,3 @@
-import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getTopics } from "../api/topicService";
 import { addBookmark } from "../api/bookmarkService";
@@ -15,20 +14,18 @@ type Topic = {
 export default function Explore() {
   const [topics, setTopics] = useState<Topic[]>([]);
   const [search, setSearch] = useState("");
-  const [searchParams] = useSearchParams();
 
   useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
 
-  const query = searchParams.get("search");
+  const query = params.get("search");
 
   if (query) {
-
     setSearch(query);
-
   }
 
   loadTopics();
-
+  
 }, []);
 
 const loadTopics = async () => {

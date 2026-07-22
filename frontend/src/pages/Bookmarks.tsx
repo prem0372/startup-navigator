@@ -84,14 +84,25 @@ function Bookmarks() {
 
                   </h2>
 
+                  <p className="mt-2 text-gray-600">
+                    {bookmark.topic.category}
+                  </p>
+
+                  <p className="mt-2">
+                    {bookmark.topic.description}
+                  </p>
+
+                  <span className="inline-block mt-3 rounded bg-blue-100 px-3 py-1 text-blue-700">
+                    {bookmark.topic.difficulty}
+                  </span>
+
                   <button
 
                     onClick={() =>
                       removeBookmark(bookmark.id)
                     }
 
-                    className="mt-4 rounded bg-red-600 px-4 py-2 text-white"
-
+                      className="mt-8 w-full rounded-lg bg-red-600 py-2 text-white hover:bg-red-700"
                   >
 
                     Remove Bookmark
